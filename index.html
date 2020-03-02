@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Shopping Cart</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet" />
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <section>
+        <div class="container">
+            <div class="cart">
+                <div class="col-md-12 col-lg-10 mx-auto">
+                    <div class="cart-item">
+                        <div class="row">
+                            <div class="col-md-7 center-item">
+                                <img src="images/product-1.png" alt="">
+                                <h5>iPhone 11 128GB Black</h5>
+                            </div>
+
+                            <div class="col-md-5 center-item">
+                                <div class="input-group number-spinner">
+                                    <button id="minus-btn-phone" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                                    <input id="phone-text" type="text" class="form-control text-center" value="1">
+                                    <button id="plus-btn-phone" class="btn btn-default"><i class="fas fa-plus"></i></button>
+                                </div>
+                                <h5>$ <span id="phone-price">1219</span></h5>
+                                <img src="images/remove.png" alt="" class="remove-item">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="cart-item">
+                        <div class="row">
+                            <div class="col-md-7 center-item mx-auto">
+                                <img src="images/product-2.png" alt="">
+                                <h5>iPhone 11 Silicone Case - Black</h5>
+                            </div>
+                            <div class="col-md-5 center-item">
+                                <div class="input-group number-spinner">
+                                    <button id="minus-btn-cover" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                                    <input id="cover-text" type="text" class="form-control text-center" value="1">
+                                    <button id="plus-btn-cover" class="btn btn-default"><i class="fas fa-plus"></i></button>
+
+                                </div>
+                                <h5>$<span id="cover-price">59</span></h5>
+                                <img src="images/remove.png" alt="" class="remove-item">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="cart-item">
+                        <div class="row">
+
+                            <div class="col-md-8">
+                                <h5>Subtotal: </h5>
+                                <h5>Tax:</h5>
+                                <h5>Total:</h5>
+                            </div>
+
+                            <div class="col-md-4 status">
+                                <h5>$<span id="sub-total-price">1,278</span></h5>
+                                <h5>$ <span id="tax">0</span></h5>
+                                <h5>$<span id="grand-total-price">1,278</span></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 pt-4 pb-4">
+                        <button type="button" class="btn btn-success check-out">Check Out</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+
+    <script>
+        /****Handling the Phone Amount minus Button**/
+        const minusBtnPhone = document.getElementById("minus-btn-phone");
+        minusBtnPhone.addEventListener("click", function() {
+
+            const unitPhone = 1;
+            changeAmount("phone-text", (-1) * unitPhone);
+            const unitPricePhone = 1219;
+            changePrice("phone-price", (-1) * unitPricePhone);
+
+
+            var subTotal = subtotalPrice("sub-total-price", (-1) * unitPricePhone);
+            var tax = taxAmount(subTotal);
+
+            var gTotal = grandTotal(tax, subTotal);
+
+        });
+
+        /****Handling the Phone Amount Plus Button**/
+        const plusBtnPhone = document.getElementById("plus-btn-phone");
+        plusBtnPhone.addEventListener("click", function() {
+
+            const unitPhone = 1;
+            changeAmount("phone-text", unitPhone);
+            const unitPricePhone = 1219;
+            changePrice("phone-price", unitPricePhone);
+
+
+
+            var subTotal = subtotalPrice("sub-total-price", unitPricePhone);
+            var tax = taxAmount(subTotal);
+
+            var gTotal = grandTotal(tax, subTotal);
+
+
+
+
+        });
+
+        /****Handling the Cover Amount Minus Button**/
+        const minusBtnCover = document.getElementById("minus-btn-cover");
+        minusBtnCover.addEventListener("click", function() {
+            const unitCover = 1;
+            changeAmount("cover-text", (-1) * unitCover);
+            const unitPriceCover = 59;
+            changePrice("cover-price", (-1) * unitPriceCover);
+
+            var subTotal = subtotalPrice("sub-total-price", (-1) * unitPriceCover);
+            var tax = taxAmount(subTotal);
+
+            var gTotal = grandTotal(tax, subTotal);
+
+        });
+
+
+        /****Handling the Cover Amount Plus Button**/
+        const plusBtnCover = document.getElementById("plus-btn-cover");
+
+        plusBtnCover.addEventListener("click", function() {
+            const unitCover = 1;
+            changeAmount("cover-text", unitCover);
+            const unitPriceCover = 59;
+            changePrice("cover-price", unitPriceCover);
+
+
+            var subTotal = subtotalPrice("sub-total-price", unitPriceCover);
+            var tax = taxAmount(subTotal);
+
+            var gTotal = grandTotal(tax, subTotal);
+
+
+        });
+
+
+        /**Function For Plus Minus Button**/
+        function changeAmount(id, unit) {
+
+            const phoneText = document.getElementById(id).value;
+            var phoneValue = parseInt(phoneText);
+
+            phoneValue = phoneValue + unit;
+            document.getElementById(id).value = phoneValue;
+
+
+
+        }
+
+        /**Function for Price of Individual Item **/
+        function changePrice(idPrice, unitPrice) {
+
+            const phonePrice = document.getElementById(idPrice).innerText;
+            var phonePriceValue = parseInt(phonePrice);
+
+            phonePriceValue = phonePriceValue + unitPrice;
+
+            document.getElementById(idPrice).innerText = phonePriceValue;
+
+            return;
+        }
+
+
+
+
+        /**Function For Billing the Sub total**/
+        function subtotalPrice(idSubtotal, unitPrice) {
+
+            const subTotalPrice = document.getElementById(idSubtotal).innerText;
+            var subTotalPriceStr = subTotalPrice;
+            subTotalPriceStr = subTotalPriceStr.replace(/,/g, "");
+
+            var subTotalPriceValue = parseInt(subTotalPriceStr);
+
+            subTotalPriceValue = subTotalPriceValue + unitPrice;
+            document.getElementById(idSubtotal).innerText = subTotalPriceValue;
+
+            return subTotalPriceValue;
+        }
+
+
+
+        /***Function For  Billing the tax**/
+        function taxAmount(subTotal) {
+
+            const tax = document.getElementById("tax").innerText;
+            var taxValue = parseFloat(tax);
+
+            taxValue = subTotal * (5 / 100);
+            taxValueRound = Number(taxValue.toFixed(2));
+            document.getElementById("tax").innerText = taxValueRound;
+
+            return taxValueRound;
+        }
+
+        /***Function For  Billing the Grand Total**/
+        function grandTotal(taxValue, totalPriceValue) {
+
+            const grandTotalPrice = document.getElementById("grand-total-price").innerText;
+            var grandTotalPriceStr = grandTotalPrice;
+            grandTotalPriceStr = grandTotalPriceStr.replace(/,/g, "");
+
+            var grandTotalPriceValue = parseInt(grandTotalPriceStr);
+
+            grandTotalPriceValue = totalPriceValue + taxValue;
+            document.getElementById("grand-total-price").innerText = grandTotalPriceValue;
+
+        }
+
+        // function taxDecrease(subTotal) {
+
+        //     const tax = document.getElementById("tax").innerText;
+        //     var taxValue = parseFloat(tax);
+        //     console.log(subTotal);
+        //     taxValue = subTotal * (5 / 100);
+        //     console.log(taxValue);
+        //     // taxValueRound = Number(taxValue.toFixed(2));
+        //     // console.log(taxValueRound);
+        //     // document.getElementById("tax").innerText = taxValueRound;
+        // }
+    </script>
+</body>
+
+</html>
