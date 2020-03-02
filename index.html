@@ -14,43 +14,45 @@
 
     <section>
         <div class="container">
-            <h1 class="text-center header"><span class="text-danger ">Uno</span> Mobile and Cover Shop</h1>
-            <div class="cart">
-                <div class="col-md-12 col-lg-10 mx-auto">
-                    <div class="cart-item">
-                        <div class="row">
-                            <div class="col-md-7 center-item">
-                                <img src="images/product-1.png" alt="">
-                                <h5>iPhone 11 128GB Black</h5>
-                            </div>
-
-                            <div class="col-md-5 center-item">
-                                <div class="input-group number-spinner">
-                                    <button id="minus-btn-phone" class="btn btn-default"><i class="fas fa-minus"></i></button>
-                                    <input id="phone-text" type="text" class="form-control text-center" value="1">
-                                    <button id="plus-btn-phone" class="btn btn-default"><i class="fas fa-plus"></i></button>
+            <div id="order-page">
+                <h1 class="text-center header"><span class="text-danger">Uno</span> Mobile and Cover Shop</h1>
+                <div class="cart">
+                    <div class="col-md-12 col-lg-10 mx-auto">
+                        <div class="cart-item">
+                            <div class="row">
+                                <div class="col-md-7 center-item">
+                                    <img src="images/product-1.png" alt="">
+                                    <h5>iPhone 11 128GB Black</h5>
                                 </div>
-                                <h5>$ <span id="phone-price">1219</span></h5>
-                                <img src="images/remove.png" alt="" class="remove-item">
+
+                                <div class="col-md-5 center-item">
+                                    <div class="input-group number-spinner">
+                                        <button id="minus-btn-phone" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                                        <input id="phone-text" type="text" class="form-control text-center" value="1">
+                                        <button id="plus-btn-phone" class="btn btn-default"><i class="fas fa-plus"></i></button>
+                                    </div>
+                                    <h5>$ <span id="phone-price">1219</span></h5>
+                                    <img src="images/remove.png" alt="" class="remove-item">
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="cart-item">
-                        <div class="row">
-                            <div class="col-md-7 center-item mx-auto">
-                                <img src="images/product-2.png" alt="">
-                                <h5>iPhone 11 Silicone Case - Black</h5>
-                            </div>
-                            <div class="col-md-5 center-item">
-                                <div class="input-group number-spinner">
-                                    <button id="minus-btn-cover" class="btn btn-default"><i class="fas fa-minus"></i></button>
-                                    <input id="cover-text" type="text" class="form-control text-center" value="1">
-                                    <button id="plus-btn-cover" class="btn btn-default"><i class="fas fa-plus"></i></button>
-
+                        <div class="cart-item">
+                            <div class="row">
+                                <div class="col-md-7 center-item mx-auto">
+                                    <img src="images/product-2.png" alt="">
+                                    <h5>iPhone 11 Silicone Case - Black</h5>
                                 </div>
-                                <h5>$<span id="cover-price">59</span></h5>
-                                <img src="images/remove.png" alt="" class="remove-item">
+                                <div class="col-md-5 center-item">
+                                    <div class="input-group number-spinner">
+                                        <button id="minus-btn-cover" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                                        <input id="cover-text" type="text" class="form-control text-center" value="1">
+                                        <button id="plus-btn-cover" class="btn btn-default"><i class="fas fa-plus"></i></button>
+
+                                    </div>
+                                    <h5>$<span id="cover-price">59</span></h5>
+                                    <img src="images/remove.png" alt="" class="remove-item">
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -72,13 +74,20 @@
                         </div>
                     </div>
                     <div class="col-md-12 pt-4 pb-4">
-                        <button type="button" class="btn btn-success check-out">Check Out</button>
+                        <button id="check-out-btn" type="button" class="btn btn-success check-out">Check Out</button>
                     </div>
                 </div>
             </div>
         </div>
 
         <section>
+            <div class="container ">
+                <div class="text-center" id="confirm-page">
+                    <h1 class="text-success">Congratulations!</h1>
+                    <h3>Your Purchase Has Been Successfully Made. Thank You for shopping at <span class="text-danger ">Uno</span> Mobile and Cover Shop! </h3>
+                </div>
+
+            </div>
 
         </section>
 
@@ -158,6 +167,18 @@
 
         });
 
+        const checkOutBtn = document.getElementById("check-out-btn");
+        checkOutBtn.addEventListener("click", function() {
+
+            const orderPage = document.getElementById("order-page");
+            orderPage.style.display = "none";
+            const confirmPage = document.getElementById("confirm-page");
+            confirmPage.style.display = "block";
+
+
+        })
+
+
 
         /**Function For Plus Minus Button**/
         function changeAmount(id, unit) {
@@ -231,18 +252,6 @@
             document.getElementById("grand-total-price").innerText = grandTotalPriceValue;
 
         }
-
-        // function taxDecrease(subTotal) {
-
-        //     const tax = document.getElementById("tax").innerText;
-        //     var taxValue = parseFloat(tax);
-        //     console.log(subTotal);
-        //     taxValue = subTotal * (5 / 100);
-        //     console.log(taxValue);
-        //     // taxValueRound = Number(taxValue.toFixed(2));
-        //     // console.log(taxValueRound);
-        //     // document.getElementById("tax").innerText = taxValueRound;
-        // }
     </script>
 </body>
 
